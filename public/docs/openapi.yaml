@@ -1,0 +1,1350 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'https://platform.piramid.com.ua'
+paths:
+  /api/documentation:
+    get:
+      summary: 'Display Swagger API page.'
+      operationId: displaySwaggerAPIPage
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>L5 Swagger UI</title>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"http://platform.piramid.com.ua/docs/asset/swagger-ui.css?v=1a3104533e165579a786263992e35a84\">\n    <link rel=\"icon\" type=\"image/png\" href=\"http://platform.piramid.com.ua/docs/asset/favicon-32x32.png?v=40d4f2c38d1cd854ad463f16373cbcb6\" sizes=\"32x32\"/>\n    <link rel=\"icon\" type=\"image/png\" href=\"http://platform.piramid.com.ua/docs/asset/favicon-16x16.png?v=f0ae831196d55d8f4115b6c5e8ec5384\" sizes=\"16x16\"/>\n    <style>\n    html\n    {\n        box-sizing: border-box;\n        overflow: -moz-scrollbars-vertical;\n        overflow-y: scroll;\n    }\n    *,\n    *:before,\n    *:after\n    {\n        box-sizing: inherit;\n    }\n\n    body {\n      margin:0;\n      background: #fafafa;\n    }\n    </style>\n</head>\n\n<body>\n<div id=\"swagger-ui\"></div>\n\n<script src=\"http://platform.piramid.com.ua/docs/asset/swagger-ui-bundle.js?v=97fff9b3851e64cb29612bd503cbc441\"></script>\n<script src=\"http://platform.piramid.com.ua/docs/asset/swagger-ui-standalone-preset.js?v=0107c89c66bb6bdb198b28f7eeffea70\"></script>\n<script>\n    window.onload = function() {\n        // Build a system\n        const ui = SwaggerUIBundle({\n            dom_id: '#swagger-ui',\n            url: \"http://platform.piramid.com.ua/docs/api-docs.json\",\n            operationsSorter: null,\n            configUrl: null,\n            validatorUrl: null,\n            oauth2RedirectUrl: \"http://platform.piramid.com.ua/api/oauth2-callback\",\n\n            requestInterceptor: function(request) {\n                request.headers['X-CSRF-TOKEN'] = '';\n                return request;\n            },\n\n            presets: [\n                SwaggerUIBundle.presets.apis,\n                SwaggerUIStandalonePreset\n            ],\n\n            plugins: [\n                SwaggerUIBundle.plugins.DownloadUrl\n            ],\n\n            layout: \"StandaloneLayout\",\n            docExpansion : \"none\",\n            deepLinking: true,\n            filter: true,\n            persistAuthorization: \"false\",\n\n        })\n\n        window.ui = ui\n\n            }\n</script>\n</body>\n</html>\n"
+      tags:
+        - Endpoints
+      security: []
+  /api/oauth2-callback:
+    get:
+      summary: 'Display Oauth2 callback pages.'
+      operationId: displayOauth2CallbackPages
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "<!doctype html>\n<html lang=\"en-US\">\n<head>\n    <title>Swagger UI: OAuth2 Redirect</title>\n</head>\n<body>\n<script>\n    'use strict';\n    function run () {\n        var oauth2 = window.opener.swaggerUIRedirectOauth2;\n        var sentState = oauth2.state;\n        var redirectUrl = oauth2.redirectUrl;\n        var isValid, qp, arr;\n\n        if (/code|token|error/.test(window.location.hash)) {\n            qp = window.location.hash.substring(1).replace('?', '&');\n        } else {\n            qp = location.search.substring(1);\n        }\n\n        arr = qp.split(\"&\");\n        arr.forEach(function (v,i,_arr) { _arr[i] = '\"' + v.replace('=', '\":\"') + '\"';});\n        qp = qp ? JSON.parse('{' + arr.join() + '}',\n                function (key, value) {\n                    return key === \"\" ? value : decodeURIComponent(value);\n                }\n        ) : {};\n\n        isValid = qp.state === sentState;\n\n        if ((\n          oauth2.auth.schema.get(\"flow\") === \"accessCode\" ||\n          oauth2.auth.schema.get(\"flow\") === \"authorizationCode\" ||\n          oauth2.auth.schema.get(\"flow\") === \"authorization_code\"\n        ) && !oauth2.auth.code) {\n            if (!isValid) {\n                oauth2.errCb({\n                    authId: oauth2.auth.name,\n                    source: \"auth\",\n                    level: \"warning\",\n                    message: \"Authorization may be unsafe, passed state was changed in server. The passed state wasn't returned from auth server.\"\n                });\n            }\n\n            if (qp.code) {\n                delete oauth2.state;\n                oauth2.auth.code = qp.code;\n                oauth2.callback({auth: oauth2.auth, redirectUrl: redirectUrl});\n            } else {\n                let oauthErrorMsg;\n                if (qp.error) {\n                    oauthErrorMsg = \"[\"+qp.error+\"]: \" +\n                        (qp.error_description ? qp.error_description+ \". \" : \"no accessCode received from the server. \") +\n                        (qp.error_uri ? \"More info: \"+qp.error_uri : \"\");\n                }\n\n                oauth2.errCb({\n                    authId: oauth2.auth.name,\n                    source: \"auth\",\n                    level: \"error\",\n                    message: oauthErrorMsg || \"[Authorization failed]: no accessCode received from the server.\"\n                });\n            }\n        } else {\n            oauth2.callback({auth: oauth2.auth, token: qp, isValid: isValid, redirectUrl: redirectUrl});\n        }\n        window.close();\n    }\n\n    if (document.readyState !== 'loading') {\n        run();\n    } else {\n        document.addEventListener('DOMContentLoaded', function () {\n            run();\n        });\n    }\n</script>\n</body>\n</html>\n"
+      tags:
+        - Endpoints
+      security: []
+  /api/signin:
+    post:
+      summary: ''
+      operationId: postApiSignin
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must not be greater than 150 characters.'
+                  example: neil.rohan@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: dolor
+              required:
+                - email
+                - password
+      security: []
+  /api/signup:
+    post:
+      summary: ''
+      operationId: postApiSignup
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: ''
+                  example: quis
+                email:
+                  type: string
+                  description: 'Must not be greater than 150 characters.'
+                  example: obatz@example.com
+                password:
+                  type: string
+                  description: ''
+                  example: est
+              required:
+                - first_name
+                - email
+                - password
+      security: []
+  /api/registrations:
+    get:
+      summary: ''
+      operationId: getApiRegistrations
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/registrations/create:
+    get:
+      summary: ''
+      operationId: getApiRegistrationsCreate
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/registrations/{column}/{value}':
+    get:
+      summary: ''
+      operationId: getApiRegistrationsColumnValue
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: temporibus
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: occaecati
+        required: true
+        schema:
+          type: string
+  '/api/registrations/{column}/{value}/update':
+    get:
+      summary: ''
+      operationId: getApiRegistrationsColumnValueUpdate
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: nesciunt
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: aut
+        required: true
+        schema:
+          type: string
+  '/api/registrations/{column}/{value}/delete':
+    get:
+      summary: ''
+      operationId: getApiRegistrationsColumnValueDelete
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: sed
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: debitis
+        required: true
+        schema:
+          type: string
+  '/api/registrations/{column}/{value}/create-user':
+    get:
+      summary: ''
+      operationId: getApiRegistrationsColumnValueCreateUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: enim
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: molestias
+        required: true
+        schema:
+          type: string
+  /api/users:
+    get:
+      summary: ''
+      operationId: getApiUsers
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/users/create:
+    get:
+      summary: ''
+      operationId: getApiUsersCreate
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/users/{column}/{value}':
+    get:
+      summary: ''
+      operationId: getApiUsersColumnValue
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: 19
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: value
+        description: ''
+        example: qui
+        required: true
+        schema:
+          type: string
+  '/api/users/{column}/{value}/update':
+    get:
+      summary: ''
+      operationId: getApiUsersColumnValueUpdate
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: 18
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: value
+        description: ''
+        example: molestiae
+        required: true
+        schema:
+          type: string
+  '/api/users/{column}/{value}/delete':
+    get:
+      summary: ''
+      operationId: getApiUsersColumnValueDelete
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: 12
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: value
+        description: ''
+        example: quo
+        required: true
+        schema:
+          type: string
+  '/api/users/{column}/{value}/roles':
+    get:
+      summary: ''
+      operationId: getApiUsersColumnValueRoles
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: 17
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: value
+        description: ''
+        example: reprehenderit
+        required: true
+        schema:
+          type: string
+  '/api/users/{column}/{value}/roles/{role_slug}':
+    get:
+      summary: ''
+      operationId: getApiUsersColumnValueRolesRole_slug
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: 18
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: value
+        description: ''
+        example: alias
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: role_slug
+        description: 'The slug of the role.'
+        example: dolor
+        required: true
+        schema:
+          type: string
+  '/api/users/{column}/{value}/permissions':
+    get:
+      summary: ''
+      operationId: getApiUsersColumnValuePermissions
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: 2
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: value
+        description: ''
+        example: quasi
+        required: true
+        schema:
+          type: string
+  '/api/users/{column}/{value}/permissions/{permission_slug}':
+    get:
+      summary: ''
+      operationId: getApiUsersColumnValuePermissionsPermission_slug
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: 19
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: value
+        description: ''
+        example: possimus
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: permission_slug
+        description: 'The slug of the permission.'
+        example: non
+        required: true
+        schema:
+          type: string
+  /api/roles:
+    get:
+      summary: ''
+      operationId: getApiRoles
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/roles/create:
+    get:
+      summary: ''
+      operationId: getApiRolesCreate
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/roles/{column}/{value}':
+    get:
+      summary: ''
+      operationId: getApiRolesColumnValue
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: sed
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: nobis
+        required: true
+        schema:
+          type: string
+  '/api/roles/{column}/{value}/update':
+    get:
+      summary: ''
+      operationId: getApiRolesColumnValueUpdate
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: voluptatem
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: illum
+        required: true
+        schema:
+          type: string
+  '/api/roles/{column}/{value}/delete':
+    get:
+      summary: ''
+      operationId: getApiRolesColumnValueDelete
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: explicabo
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: quidem
+        required: true
+        schema:
+          type: string
+  '/api/roles/{column}/{value}/users':
+    get:
+      summary: ''
+      operationId: getApiRolesColumnValueUsers
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: vitae
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: aliquam
+        required: true
+        schema:
+          type: string
+  '/api/roles/{column}/{value}/permissions':
+    get:
+      summary: ''
+      operationId: getApiRolesColumnValuePermissions
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: accusamus
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: maxime
+        required: true
+        schema:
+          type: string
+  /api/permissions:
+    get:
+      summary: ''
+      operationId: getApiPermissions
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/permissions/{column}/{value}':
+    get:
+      summary: ''
+      operationId: getApiPermissionsColumnValue
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: quasi
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: veniam
+        required: true
+        schema:
+          type: string
+  '/api/permissions/{column}/{value}/roles':
+    get:
+      summary: ''
+      operationId: getApiPermissionsColumnValueRoles
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: fuga
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: impedit
+        required: true
+        schema:
+          type: string
+  '/api/permissions/{column}/{value}/users':
+    get:
+      summary: ''
+      operationId: getApiPermissionsColumnValueUsers
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: sit
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: similique
+        required: true
+        schema:
+          type: string
+  /api/taxonomies:
+    get:
+      summary: ''
+      operationId: getApiTaxonomies
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/taxonomies/create:
+    get:
+      summary: ''
+      operationId: getApiTaxonomiesCreate
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/taxonomies/{column}/{value}':
+    get:
+      summary: ''
+      operationId: getApiTaxonomiesColumnValue
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: necessitatibus
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: at
+        required: true
+        schema:
+          type: string
+  '/api/taxonomies/{column}/{value}/update':
+    get:
+      summary: ''
+      operationId: getApiTaxonomiesColumnValueUpdate
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: ut
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: iste
+        required: true
+        schema:
+          type: string
+  '/api/taxonomies/{column}/{value}/delete':
+    get:
+      summary: ''
+      operationId: getApiTaxonomiesColumnValueDelete
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: provident
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: ipsa
+        required: true
+        schema:
+          type: string
+  /api/taxonomy-types:
+    get:
+      summary: ''
+      operationId: getApiTaxonomyTypes
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/taxonomy-types/create:
+    get:
+      summary: ''
+      operationId: getApiTaxonomyTypesCreate
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/taxonomy-types/{column}/{value}':
+    get:
+      summary: ''
+      operationId: getApiTaxonomyTypesColumnValue
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: iste
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: nam
+        required: true
+        schema:
+          type: string
+  '/api/taxonomy-types/{column}/{value}/update':
+    get:
+      summary: ''
+      operationId: getApiTaxonomyTypesColumnValueUpdate
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: deleniti
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: dolor
+        required: true
+        schema:
+          type: string
+  '/api/taxonomy-types/{column}/{value}/delete':
+    get:
+      summary: ''
+      operationId: getApiTaxonomyTypesColumnValueDelete
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: column
+        description: ''
+        example: exercitationem
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: ''
+        example: sit
+        required: true
+        schema:
+          type: string
+tags:
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []

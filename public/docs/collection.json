@@ -1,0 +1,2283 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "https:\/\/platform.piramid.com.ua\/"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "95c4c4b3-e6df-4ea2-9af3-663d9205cb32",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Display Swagger API page.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/documentation",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/documentation"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>L5 Swagger UI<\/title>\n    <link rel=\"stylesheet\" type=\"text\/css\" href=\"http:\/\/platform.piramid.com.ua\/docs\/asset\/swagger-ui.css?v=1a3104533e165579a786263992e35a84\">\n    <link rel=\"icon\" type=\"image\/png\" href=\"http:\/\/platform.piramid.com.ua\/docs\/asset\/favicon-32x32.png?v=40d4f2c38d1cd854ad463f16373cbcb6\" sizes=\"32x32\"\/>\n    <link rel=\"icon\" type=\"image\/png\" href=\"http:\/\/platform.piramid.com.ua\/docs\/asset\/favicon-16x16.png?v=f0ae831196d55d8f4115b6c5e8ec5384\" sizes=\"16x16\"\/>\n    <style>\n    html\n    {\n        box-sizing: border-box;\n        overflow: -moz-scrollbars-vertical;\n        overflow-y: scroll;\n    }\n    *,\n    *:before,\n    *:after\n    {\n        box-sizing: inherit;\n    }\n\n    body {\n      margin:0;\n      background: #fafafa;\n    }\n    <\/style>\n<\/head>\n\n<body>\n<div id=\"swagger-ui\"><\/div>\n\n<script src=\"http:\/\/platform.piramid.com.ua\/docs\/asset\/swagger-ui-bundle.js?v=97fff9b3851e64cb29612bd503cbc441\"><\/script>\n<script src=\"http:\/\/platform.piramid.com.ua\/docs\/asset\/swagger-ui-standalone-preset.js?v=0107c89c66bb6bdb198b28f7eeffea70\"><\/script>\n<script>\n    window.onload = function() {\n        \/\/ Build a system\n        const ui = SwaggerUIBundle({\n            dom_id: '#swagger-ui',\n            url: \"http:\/\/platform.piramid.com.ua\/docs\/api-docs.json\",\n            operationsSorter: null,\n            configUrl: null,\n            validatorUrl: null,\n            oauth2RedirectUrl: \"http:\/\/platform.piramid.com.ua\/api\/oauth2-callback\",\n\n            requestInterceptor: function(request) {\n                request.headers['X-CSRF-TOKEN'] = '';\n                return request;\n            },\n\n            presets: [\n                SwaggerUIBundle.presets.apis,\n                SwaggerUIStandalonePreset\n            ],\n\n            plugins: [\n                SwaggerUIBundle.plugins.DownloadUrl\n            ],\n\n            layout: \"StandaloneLayout\",\n            docExpansion : \"none\",\n            deepLinking: true,\n            filter: true,\n            persistAuthorization: \"false\",\n\n        })\n\n        window.ui = ui\n\n            }\n<\/script>\n<\/body>\n<\/html>\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Display Oauth2 callback pages.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/oauth2-callback",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/oauth2-callback"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "content-type",
+                                    "value": "text\/html; charset=UTF-8"
+                                },
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "<!doctype html>\n<html lang=\"en-US\">\n<head>\n    <title>Swagger UI: OAuth2 Redirect<\/title>\n<\/head>\n<body>\n<script>\n    'use strict';\n    function run () {\n        var oauth2 = window.opener.swaggerUIRedirectOauth2;\n        var sentState = oauth2.state;\n        var redirectUrl = oauth2.redirectUrl;\n        var isValid, qp, arr;\n\n        if (\/code|token|error\/.test(window.location.hash)) {\n            qp = window.location.hash.substring(1).replace('?', '&');\n        } else {\n            qp = location.search.substring(1);\n        }\n\n        arr = qp.split(\"&\");\n        arr.forEach(function (v,i,_arr) { _arr[i] = '\"' + v.replace('=', '\":\"') + '\"';});\n        qp = qp ? JSON.parse('{' + arr.join() + '}',\n                function (key, value) {\n                    return key === \"\" ? value : decodeURIComponent(value);\n                }\n        ) : {};\n\n        isValid = qp.state === sentState;\n\n        if ((\n          oauth2.auth.schema.get(\"flow\") === \"accessCode\" ||\n          oauth2.auth.schema.get(\"flow\") === \"authorizationCode\" ||\n          oauth2.auth.schema.get(\"flow\") === \"authorization_code\"\n        ) && !oauth2.auth.code) {\n            if (!isValid) {\n                oauth2.errCb({\n                    authId: oauth2.auth.name,\n                    source: \"auth\",\n                    level: \"warning\",\n                    message: \"Authorization may be unsafe, passed state was changed in server. The passed state wasn't returned from auth server.\"\n                });\n            }\n\n            if (qp.code) {\n                delete oauth2.state;\n                oauth2.auth.code = qp.code;\n                oauth2.callback({auth: oauth2.auth, redirectUrl: redirectUrl});\n            } else {\n                let oauthErrorMsg;\n                if (qp.error) {\n                    oauthErrorMsg = \"[\"+qp.error+\"]: \" +\n                        (qp.error_description ? qp.error_description+ \". \" : \"no accessCode received from the server. \") +\n                        (qp.error_uri ? \"More info: \"+qp.error_uri : \"\");\n                }\n\n                oauth2.errCb({\n                    authId: oauth2.auth.name,\n                    source: \"auth\",\n                    level: \"error\",\n                    message: oauthErrorMsg || \"[Authorization failed]: no accessCode received from the server.\"\n                });\n            }\n        } else {\n            oauth2.callback({auth: oauth2.auth, token: qp, isValid: isValid, redirectUrl: redirectUrl});\n        }\n        window.close();\n    }\n\n    if (document.readyState !== 'loading') {\n        run();\n    } else {\n        document.addEventListener('DOMContentLoaded', function () {\n            run();\n        });\n    }\n<\/script>\n<\/body>\n<\/html>\n",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "POST api\/signin",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/signin",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/signin"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"neil.rohan@example.org\",\"password\":\"dolor\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/signup",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/signup",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/signup"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"first_name\":\"quis\",\"email\":\"obatz@example.com\",\"password\":\"est\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "GET api\/registrations",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/registrations",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/registrations"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/registrations\/create",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/registrations\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/registrations\/create"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/registrations\/{column}\/{value}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/registrations\/:column\/:value",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/registrations\/:column\/:value",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "temporibus",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "occaecati",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/registrations\/{column}\/{value}\/update",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/registrations\/:column\/:value\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/registrations\/:column\/:value\/update",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "nesciunt",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "aut",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/registrations\/{column}\/{value}\/delete",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/registrations\/:column\/:value\/delete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/registrations\/:column\/:value\/delete",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "sed",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "debitis",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/registrations\/{column}\/{value}\/create-user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/registrations\/:column\/:value\/create-user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/registrations\/:column\/:value\/create-user",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "enim",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "molestias",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/users",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/users\/create",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/create"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/users\/{column}\/{value}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:column\/:value",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:column\/:value",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "19",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "qui",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/users\/{column}\/{value}\/update",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:column\/:value\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:column\/:value\/update",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "18",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "molestiae",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/users\/{column}\/{value}\/delete",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:column\/:value\/delete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:column\/:value\/delete",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "12",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "quo",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/users\/{column}\/{value}\/roles",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:column\/:value\/roles",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:column\/:value\/roles",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "17",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "reprehenderit",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/users\/{column}\/{value}\/roles\/{role_slug}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:column\/:value\/roles\/:role_slug",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:column\/:value\/roles\/:role_slug",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "18",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "alias",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "role_slug",
+                                    "key": "role_slug",
+                                    "value": "dolor",
+                                    "description": "The slug of the role."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/users\/{column}\/{value}\/permissions",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:column\/:value\/permissions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:column\/:value\/permissions",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "2",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "quasi",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/users\/{column}\/{value}\/permissions\/{permission_slug}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:column\/:value\/permissions\/:permission_slug",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:column\/:value\/permissions\/:permission_slug",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "19",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "possimus",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "permission_slug",
+                                    "key": "permission_slug",
+                                    "value": "non",
+                                    "description": "The slug of the permission."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/roles",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/roles",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/roles"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/roles\/create",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/roles\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/roles\/create"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/roles\/{column}\/{value}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/roles\/:column\/:value",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/roles\/:column\/:value",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "sed",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "nobis",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/roles\/{column}\/{value}\/update",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/roles\/:column\/:value\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/roles\/:column\/:value\/update",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "voluptatem",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "illum",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/roles\/{column}\/{value}\/delete",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/roles\/:column\/:value\/delete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/roles\/:column\/:value\/delete",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "explicabo",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "quidem",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/roles\/{column}\/{value}\/users",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/roles\/:column\/:value\/users",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/roles\/:column\/:value\/users",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "vitae",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "aliquam",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/roles\/{column}\/{value}\/permissions",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/roles\/:column\/:value\/permissions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/roles\/:column\/:value\/permissions",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "accusamus",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "maxime",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/permissions",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/permissions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/permissions"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/permissions\/{column}\/{value}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/permissions\/:column\/:value",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/permissions\/:column\/:value",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "quasi",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "veniam",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/permissions\/{column}\/{value}\/roles",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/permissions\/:column\/:value\/roles",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/permissions\/:column\/:value\/roles",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "fuga",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "impedit",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/permissions\/{column}\/{value}\/users",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/permissions\/:column\/:value\/users",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/permissions\/:column\/:value\/users",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "sit",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "similique",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/taxonomies",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/taxonomies",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/taxonomies"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/taxonomies\/create",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/taxonomies\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/taxonomies\/create"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/taxonomies\/{column}\/{value}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/taxonomies\/:column\/:value",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/taxonomies\/:column\/:value",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "necessitatibus",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "at",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/taxonomies\/{column}\/{value}\/update",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/taxonomies\/:column\/:value\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/taxonomies\/:column\/:value\/update",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "ut",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "iste",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/taxonomies\/{column}\/{value}\/delete",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/taxonomies\/:column\/:value\/delete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/taxonomies\/:column\/:value\/delete",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "provident",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "ipsa",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/taxonomy-types",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/taxonomy-types",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/taxonomy-types"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/taxonomy-types\/create",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/taxonomy-types\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/taxonomy-types\/create"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/taxonomy-types\/{column}\/{value}",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/taxonomy-types\/:column\/:value",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/taxonomy-types\/:column\/:value",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "iste",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "nam",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/taxonomy-types\/{column}\/{value}\/update",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/taxonomy-types\/:column\/:value\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/taxonomy-types\/:column\/:value\/update",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "deleniti",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "dolor",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/taxonomy-types\/{column}\/{value}\/delete",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/taxonomy-types\/:column\/:value\/delete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/taxonomy-types\/:column\/:value\/delete",
+                            "variable": [
+                                {
+                                    "id": "column",
+                                    "key": "column",
+                                    "value": "exercitationem",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "value",
+                                    "key": "value",
+                                    "value": "sit",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "key",
+                "value": null,
+                "type": "string"
+            }
+        ]
+    }
+}
